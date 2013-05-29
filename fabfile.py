@@ -23,11 +23,13 @@ def ajk_vpn():
     sudo("route delete -net 192.168.1.61 -interface ppp0")
     sudo("route delete -net 192.168.1.170 -interface ppp0")
     sudo("route delete -net 192.168.1.171 -interface ppp0")
+    sudo("route delete -net 192.168.1.100 -interface ppp0")
 
     sudo("route add -net 192.168.1.24 -interface ppp0")
     sudo("route add -net 192.168.1.61 -interface ppp0")
     sudo("route add -net 192.168.1.170 -interface ppp0")
     sudo("route add -net 192.168.1.171 -interface ppp0")
+    sudo("route add -net 192.168.1.100 -interface ppp0")
 
 @task
 def new_pyproject():
