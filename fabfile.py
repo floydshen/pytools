@@ -6,7 +6,7 @@ Created on 2013-5-16
 @author: floyd
 '''
 
-from fabric.api import task, sudo, env
+from fabric.api import task, sudo, env, run
 env.user = 'floyd'
 env.hosts = ['localhost']
 
@@ -56,4 +56,8 @@ def install_pear():
     sudo("sudo pear upgrade-all")
     pass
 
-
+@task
+def help():
+    run("echo '------------------------------------------------'")
+    run("echo '|                                              |'")
+    run("echo '------------------------------------------------'")
