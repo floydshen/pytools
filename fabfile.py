@@ -46,6 +46,14 @@ def service():
     #TODO
     pass
 
-
+@task
+def install_pear():
+    sudo("cd /usr/lib/php")
+    sudo("sudo php install-pear-nozlib.phar")
+    #include_path = ".:/usr/lib/php/pear"
+    sudo("sudo pear channel-update pear.php.net")
+    sudo("sudo pecl channel-update pecl.php.net")
+    sudo("sudo pear upgrade-all")
+    pass
 
 
