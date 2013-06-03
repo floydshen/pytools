@@ -6,7 +6,7 @@ Created on 2013-5-16
 @author: floyd
 '''
 
-from fabric.api import task, sudo, env, run
+from fabric.api import task, sudo, env, run, local
 env.user = 'floyd'
 env.hosts = ['localhost']
 
@@ -32,14 +32,16 @@ def ajk_vpn():
     sudo("route add -net 192.168.1.100 -interface ppp0")
 
 @task
-def new_pyproject():
-    #TODO
-    pass
+def new_pyproject(name="test_py"):
+    local("mkdir %s" % name)
+    local("cd %s" % name)
+    local("buildout init ./")
 
 @task
-def new_mavenproject():
-    #TODO
-    pass
+def new_mavenproject(name="test_java", base="spring"):
+    local("mkdir %s" % name)
+    local("cd %s" % name)
+    local("mvn archetype:create -DgroupId=com.floydshen.data -DartifactId=%s -DarchetypeArtifactId=appfuse-basic-spring" % name)
 
 @task
 def service():
@@ -58,6 +60,6 @@ def install_pear():
 
 @task
 def help():
-    run("echo '------------------------------------------------'")
-    run("echo '|                                              |'")
-    run("echo '------------------------------------------------'")
+    run("echo ' -----------------------------------------------'")
+    run("echo '|                                               |'")
+    run("echo ' -----------------------------------------------'")
