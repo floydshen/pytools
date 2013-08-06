@@ -6,7 +6,9 @@ Created on 2013-5-16
 @author: floyd
 '''
 
-from fabric.api import task, sudo, env, run, local
+from fabric.api import task, sudo, env, run, local, cd
+import os,sys
+
 env.user = 'floyd'
 env.hosts = ['localhost']
 
@@ -63,3 +65,33 @@ def help():
     run("echo ' -----------------------------------------------'")
     run("echo '|                                               |'")
     run("echo ' -----------------------------------------------'")
+
+project_dir = "/Users/floyd/Coding/xcode/HaozuProject/Haozu/HaoZu2.0"
+@task
+def rename_haozu():
+    def listdir(dir):
+        list = os.listdir(dir)
+        for line in list:
+            filepath = os.path.join(dir,line)
+            if os.path.isdir(filepath):
+                listdir(filepath)
+            elif os.path:
+                tmp = line[0] + line[1]
+                if tmp != "HZ":
+                    if line.find("+") < 0 and line.find(".m") > -1 and line.find("AppDelegate") < 0:
+                        newpath_m = os.path.join(dir,"HZ"+line)
+                        filepath_h = os.path.join(dir,line[:-2]+".h")
+                        newpath_h = os.path.join(dir,"HZ"+line[:-2]+".h")
+#                         run("cp "+filepath+" "+newpath_m)
+#                         run("cp "+filepath_h+" "+newpath_h)
+#                         print newpath[-2]
+#                         print line[:-2]
+                        #替换文件中className
+#                         run("sed -i \"s/ "+line[:-2]+" / HZ"+line[:-2]+" /g\" *")
+                        print "sed -i s/ %s / HZ%s /g\" *" % (line[:-2], line[:-2])
+
+    with cd(project_dir):
+        listdir(project_dir)
+
+        pass
+
