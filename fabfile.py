@@ -66,7 +66,7 @@ def help():
     run("echo '|                                               |'")
     run("echo ' -----------------------------------------------'")
 
-project_dir = "/Users/floyd/Coding/xcode/HaozuProject/Haozu/HaoZu2.0"
+project_dir = "/Users/floyd/Desktop/devProjects/HaozuTest/Haozu/HaoZu2.0"
 @task
 def rename_haozu():
     def listdir(dir):
@@ -82,16 +82,22 @@ def rename_haozu():
                         newpath_m = os.path.join(dir,"HZ"+line)
                         filepath_h = os.path.join(dir,line[:-2]+".h")
                         newpath_h = os.path.join(dir,"HZ"+line[:-2]+".h")
-#                         run("cp "+filepath+" "+newpath_m)
-#                         run("cp "+filepath_h+" "+newpath_h)
-#                         print newpath[-2]
-#                         print line[:-2]
+                        run("rm -rf "+newpath_m)
+                        run("rm -rf "+newpath_h)
+                        run("cp "+filepath+" "+newpath_m)
+                        run("cp "+filepath_h+" "+newpath_h)
+
                         #替换文件中className
-#                         run("sed -i \"s/ "+line[:-2]+" / HZ"+line[:-2]+" /g\" *")
-                        print "sed -i s/ %s / HZ%s /g\" *" % (line[:-2], line[:-2])
+                        with cd(project_dir):
+                            run("find . -type f -name '*' -exec sed -i '' s/ %s / HZ%s /g {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*' -exec sed -i '' s/ %s,/ HZ%s,/g {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*' -exec sed -i '' s/ %s>/ HZ%s>/g {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*' -exec sed -i '' s/ %s{/ HZ%s{/g {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*' -exec sed -i '' s/ %s\.h/ HZ%s\.h/g {} +" % (line[:-2], line[:-2]))
+
+
+
 
     with cd(project_dir):
         listdir(project_dir)
-
-        pass
 
