@@ -84,16 +84,28 @@ def rename_haozu():
                         newpath_h = os.path.join(dir,"HZ"+line[:-2]+".h")
                         run("rm -rf "+newpath_m)
                         run("rm -rf "+newpath_h)
-                        run("cp "+filepath+" "+newpath_m)
-                        run("cp "+filepath_h+" "+newpath_h)
+                        run("mv "+filepath+" "+newpath_m)
+                        run("mv "+filepath_h+" "+newpath_h)
 
                         #替换文件中className
                         with cd(project_dir):
-                            run("find . -type f -name '*' -exec sed -i '' s/ %s / HZ%s /g {} +" % (line[:-2], line[:-2]))
-                            run("find . -type f -name '*' -exec sed -i '' s/ %s,/ HZ%s,/g {} +" % (line[:-2], line[:-2]))
-                            run("find . -type f -name '*' -exec sed -i '' s/ %s>/ HZ%s>/g {} +" % (line[:-2], line[:-2]))
-                            run("find . -type f -name '*' -exec sed -i '' s/ %s{/ HZ%s{/g {} +" % (line[:-2], line[:-2]))
-                            run("find . -type f -name '*' -exec sed -i '' s/ %s\.h/ HZ%s\.h/g {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\ %s /\ HZ%s /g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\ %s /\ HZ%s /g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\ %s,/\ HZ%s,/g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\ %s,/\ HZ%s,/g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\ %s>/\ HZ%s>/g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\ %s>/\ HZ%s>/g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\ %s{/\ HZ%s{/g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\ %s{/\ HZ%s{/g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\ %s\.h/\ HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\ %s\.h/\ HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/\"%s\.h/\"HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/\"%s\.h/\"HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
 
 
 
