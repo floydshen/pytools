@@ -85,7 +85,9 @@ def rename_haozu():
                         run("rm -rf "+newpath_m)
                         run("rm -rf "+newpath_h)
                         run("mv "+filepath+" "+newpath_m)
-                        run("mv "+filepath_h+" "+newpath_h)
+
+                        if os.path.exists(filepath_h):
+                            run("mv "+filepath_h+" "+newpath_h)
 
                         #替换文件中className
                         with cd(project_dir):
@@ -106,6 +108,9 @@ def rename_haozu():
 
                             run("find . -type f -name '*.h' -exec sed -i '' \"s/\"%s\.h/\"HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
                             run("find . -type f -name '*.m' -exec sed -i '' \"s/\"%s\.h/\"HZ%s\.h/g\" {} +" % (line[:-2], line[:-2]))
+
+                            run("find . -type f -name '*.h' -exec sed -i '' \"s/(%s /\(HZ%s /g\" {} +" % (line[:-2], line[:-2]))
+                            run("find . -type f -name '*.m' -exec sed -i '' \"s/(%s /\(HZ%s /g\" {} +" % (line[:-2], line[:-2]))
 
 
 
