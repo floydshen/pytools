@@ -9,7 +9,7 @@ setup(
         include_package_data=True,
         zip_safe=False,
         install_requires=[
-            'fabric==1.6.0',
+            'fabric==1.7.0',
         ]
         )
 

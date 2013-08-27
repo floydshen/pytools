@@ -69,6 +69,11 @@ def help():
 project_dir = "/Users/floyd/Desktop/devProjects/HaozuTest/Haozu/HaoZu2.0"
 @task
 def rename_haozu():
+    """
+    警用该方法
+    """
+    return
+    """
     def listdir(dir):
         list = os.listdir(dir)
         for line in list:
@@ -117,4 +122,4 @@ def rename_haozu():
 
     with cd(project_dir):
         listdir(project_dir)
-
+    """
